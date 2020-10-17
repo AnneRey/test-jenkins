@@ -17,7 +17,7 @@ node {
     }
   }
   
-  stage (Clean up) {
+  stage ('Clean up') {
     cleanWs()
   }
 
