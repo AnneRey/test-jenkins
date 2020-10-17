@@ -13,7 +13,10 @@ node {
   stage ('Run when a PR triggers') {
     if (env.CHANGE_ID) {
       echo "PR detected"
-      def comment = pullRequest.comment('Testing comment on befalf of Jenkins ;S ')
+      withCredentials([string(credentialsId: 'tokenGithub', variable: 'GITHUB_TOKEN')]) {
+        sh "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" -X POST -d '{\"body\": \"Test comment from Jenkins\"}' \"https://api.github.com/repos/AnneRey/test-jenkins/issues/6/comments\""
+      }
+      //def comment = pullRequest.comment('Testing comment on befalf of Jenkins ;S ')
     }
   }
   
